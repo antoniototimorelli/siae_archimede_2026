@@ -1,0 +1,35 @@
+{
+  "name": "siae-plus-frontend",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "coverage": "vitest run --coverage",
+    "type-check": "vue-tsc --noEmit",
+    "cap:sync": "cap sync"
+  },
+  "dependencies": {
+    "@itsiae/siae-design-system": "file:../itsiae-siae-design-system-1.0.3.tgz",
+    "@nuxt/ui": "^3.3.7",
+    "vue": "^3.5.32",
+    "vue-router": "^4.6.4"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^6.2.0",
+    "@capacitor/core": "^6.2.0",
+    "@types/node": "^22.10.0",
+    "@vitejs/plugin-vue": "^5.2.1",
+    "@vitest/coverage-v8": "^2.1.8",
+    "@vue/test-utils": "^2.4.6",
+    "jsdom": "^25.0.1",
+    "typescript": "~5.6.3",
+    "vite": "^6.0.5",
+    "vitest": "^2.1.8",
+    "vue-tsc": "^2.2.0"
+  }
+}
