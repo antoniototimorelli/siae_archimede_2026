@@ -190,20 +190,69 @@ Ogni skill è un file `SKILL.md` con:
 
 **Commit:** `feat(skills): add brainstorming, implementation, tdd, verification`
 
-> Prompt da inviarmi:
+> **Prompt Skill 1 — brainstorming:**
 > ```
-> Crea le 4 skill obbligatorie del plugin, ognuna in skills/NOME/SKILL.md.
-> Ogni file deve avere: frontmatter YAML con name e description contenente
-> condizioni TRIGGER esplicite e condizioni NON-TRIGGER, un titolo visuale,
-> step numerati e concreti (non istruzioni vaghe), label rischio LOW/MEDIUM/HIGH.
->
-> Le 4 skill:
-> 1. brainstorming — analisi prima del codice, trigger: "implementa/crea/scrivi/aggiungi"
-> 2. implementation — convenzioni per Vue 3 + TypeScript (naming, struttura, import)
-> 3. tdd — ciclo RED→GREEN→REFACTOR, step non saltabili
-> 4. verification — gate finale, verifica prove concrete prima di dichiarare "fatto"
->
-> Fai il commit con "feat(skills): add brainstorming, implementation, tdd, verification".
+> Crea siae-plugin/skills/brainstorming/SKILL.md.
+> Frontmatter YAML con: name: brainstorming, description che includa
+> TRIGGER (utente dice "implementa", "crea", "scrivi", "aggiungi")
+> e NON-TRIGGER (domande teoriche, richieste di spiegazione, debug).
+> Titolo visuale. Step numerati e concreti:
+> 1. Riformula il problema in una frase
+> 2. Elenca i casi limite (almeno 3)
+> 3. Proponi 2-3 approcci alternativi con pro/contro
+> 4. Stima la complessità (righe, file, tempo)
+> 5. Ottieni conferma prima di procedere
+> Label rischio: LOW. Claude non scrive codice finché lo step 5 non è completato.
+> ```
+
+> **Prompt Skill 2 — implementation:**
+> ```
+> Crea siae-plugin/skills/implementation/SKILL.md.
+> Frontmatter YAML con: name: implementation, description che includa
+> TRIGGER (Claude sta per scrivere o modificare codice Vue 3 / TypeScript)
+> e NON-TRIGGER (brainstorming, test, refactor puro).
+> Titolo visuale. Step numerati e concreti con regole specifiche:
+> 1. Naming: PascalCase per componenti Vue, camelCase per funzioni e variabili,
+>    SCREAMING_SNAKE per costanti, kebab-case per file non-componenti
+> 2. Struttura file Vue: <script setup lang="ts"> prima di <template>
+> 3. Funzioni: massimo 20 righe; se supera, estrai helper
+> 4. Import: alias @/ per src/, nessun import relativo oltre un livello (..)
+> 5. Props e emits sempre tipizzati con defineProps<T>() / defineEmits<T>()
+> 6. Nessun any; usa unknown + type guard se il tipo è incerto
+> Label rischio: MEDIUM.
+> ```
+
+> **Prompt Skill 3 — tdd:**
+> ```
+> Crea siae-plugin/skills/tdd/SKILL.md.
+> Frontmatter YAML con: name: tdd, description che includa
+> TRIGGER (Claude deve implementare una funzione, un componente o un endpoint)
+> e NON-TRIGGER (modifiche a config, documentazione, stili CSS).
+> Titolo visuale. Step numerati non saltabili:
+> 1. RED — scrivi il test che descrive il comportamento atteso;
+>    esegui la suite e verifica che il nuovo test fallisca
+> 2. GREEN — scrivi il codice minimo (e solo quello) per far passare il test;
+>    riesegui la suite e verifica che passi
+> 3. REFACTOR — rimuovi duplicazioni, migliora naming, rispetta le regole
+>    della skill implementation; riesegui la suite dopo ogni modifica
+> Regola: se salti uno step devi ricominciare dal RED.
+> Label rischio: HIGH.
+> ```
+
+> **Prompt Skill 4 — verification:**
+> ```
+> Crea siae-plugin/skills/verification/SKILL.md.
+> Frontmatter YAML con: name: verification, description che includa
+> TRIGGER (chiunque dice "ho finito", "è fatto", "posso fare il merge",
+> "task completato") e NON-TRIGGER (mid-task, durante brainstorming o TDD).
+> Titolo visuale. Step numerati con prove concrete richieste:
+> 1. Esegui la suite di test — mostra output, deve essere verde al 100%
+> 2. Controlla che non esistano file modificati non committati (git status pulito)
+> 3. Verifica che il codice rispetti le regole della skill implementation
+> 4. Esegui il linter/type-check senza errori
+> 5. Dichiara PASS solo se tutti i punti sopra sono verdi;
+>    anche un solo punto rosso → torna allo step che ha fallito
+> Label rischio: HIGH.
 > ```
 
 ---
