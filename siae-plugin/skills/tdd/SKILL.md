@@ -52,8 +52,7 @@ describe('nomeUnità', () => {
 ## Step 3 — REFACTOR: migliora senza cambiare il comportamento
 
 1. Elimina duplicazioni nel codice di produzione e nei test.
-2. Applica le regole di naming: `PascalCase` per tipi/classi, `camelCase` per funzioni/variabili, `kebab-case` per file non-componenti.
-3. Verifica che i tipi TypeScript siano corretti e precisi — nessun `any`.
+2. Verifica che il codice rispetti gli standard definiti nella skill `implementation` (naming, struttura file, regole TypeScript e Vue).
 4. Riesegui i test: **devono continuare a passare**. Se falliscono hai cambiato il comportamento — ripristina.
 5. Se emergono nuovi comportamenti da testare, torna allo Step 1 con un nuovo ciclo RED.
 
