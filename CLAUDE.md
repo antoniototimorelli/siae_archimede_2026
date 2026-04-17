@@ -26,15 +26,21 @@ bash siae-plugin/tests/test.sh | grep "test_name"
 
 ```
 siae-plugin/
-├── .claude-plugin/plugin.json   # Plugin manifest (name, version, description)
-├── hooks/hooks.json             # Hook event registrations
+├── .claude-plugin/plugin.json          # Plugin manifest (name, version, description)
+├── hooks/hooks.json                    # Hook event registrations
+├── scripts/
+│   ├── session-start.sh                # SessionStart hook script
+│   └── pre-commit.sh                   # PreToolUse hook script (Conventional Commits)
 ├── skills/
-│   ├── brainstorming/SKILL.md   # Triggered by: implementa, crea, scrivi, aggiungi
-│   ├── implementation/SKILL.md  # Vue 3 + TypeScript conventions
-│   ├── tdd/SKILL.md             # RED → GREEN → REFACTOR cycle
-│   └── SKILL.md                 # Skills index / verification gate
-├── agents/reviewer.md           # Code review agent (respects max_tokens budget)
-└── tests/test.sh                # Hook integration tests (min. 6 cases)
+│   ├── brainstorming/SKILL.md          # Triggered by: implementa, crea, scrivi, aggiungi
+│   ├── implementation/SKILL.md         # Vue 3 + TypeScript conventions
+│   ├── tdd/SKILL.md                    # RED → GREEN → REFACTOR cycle
+│   └── verification/SKILL.md           # Final gate before declaring task done
+├── agents/reviewer.md                  # Code review agent (respects max_tokens budget)
+└── tests/
+    ├── test.sh                         # Hook integration tests runner (min. 6 cases)
+    ├── test-sessionstart-hook.test.sh  # SessionStart hook tests
+    └── test-precommit-hook.test.sh     # PreToolUse / Conventional Commits tests
 ```
 
 ## Hooks
