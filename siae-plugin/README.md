@@ -96,7 +96,34 @@ echo "Exit: $?"   # atteso: 2
 
 ## Agents
 
-_Da documentare._
+Gli agent sono file Markdown in `agents/` con system prompt dedicato e budget di token esplicito nel frontmatter. Claude delega loro compiti in sotto-sessione con contesto separato, evitando di inquinare il contesto principale.
+
+### reviewer
+
+**File:** `agents/reviewer.md`
+**Budget:** `max_tokens: 8000` (dichiarato nel frontmatter, conforme al vincolo della traccia §3.5).
+**Model:** `sonnet` — bilancia qualità dell'analisi e costo per review di diff medi.
+**Tools:** `Read`, `Grep`, `Glob` (solo read-only: l'agent non modifica file né esegue comandi).
+**Rischio:** **MEDIUM** — non modifica file ma il suo verdict `PASS`/`FAIL` può sbloccare o bloccare il gate di verification.
+
+**Comportamento:** riceve un diff o una lista di path, classifica ogni finding in `CRITICAL` / `WARNING` / `INFO` e produce un report nel formato:
+
+```markdown
+## Review Report
+### CRITICAL
+- [file:riga] Problema -> Fix suggerito
+### WARNING
+- [file:riga] Problema -> Fix suggerito
+### INFO
+- [file:riga] Nota
+### Verdict: PASS | FAIL
+```
+
+**Come si attiva:**
+- Automaticamente: step 3 della skill `implementation` (dopo la fase REFACTOR del ciclo TDD) e come gate finale prima della skill `verification`.
+- Manualmente: l'utente chiede `"review"`, `"revisiona"`, `"controlla il codice"`.
+
+**Criteri di review specifici** al contesto SIAE+ (Story 2): tipizzazione TypeScript esplicita (RNF-06), separazione routes/controllers/services (RNF-05), password non in chiaro + JWT da env (RNF-04), persistenza `fs` su `users.json` (RNF-02), coverage vitest >= 70% (RNF-08).
 
 ---
 
