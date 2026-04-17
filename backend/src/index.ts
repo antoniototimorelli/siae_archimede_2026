@@ -11,6 +11,9 @@ app.use(cors({
   credentials: true,
 }))
 app.use(express.json({ limit: '10mb' }))
+  credentials: true
+}))
+app.use(express.json({ limit: '100kb' }))
 
 app.get('/api/health', (_req: Request, res: Response) => res.json({ status: 'ok' }))
 app.use('/api', router)
