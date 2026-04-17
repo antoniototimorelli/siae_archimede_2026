@@ -12,11 +12,11 @@ Le skill sono file `SKILL.md` con frontmatter YAML che Claude Code legge per dec
 
 **File:** `skills/brainstorming/SKILL.md`
 
-**Perché rischio LOW:** questa skill produce solo testo (analisi, piano, stime) — non esegue comandi né modifica file. Il danno massimo è un piano sbagliato, correggibile prima di scrivere codice.
+**Perché rischio MEDIUM:** la skill produce solo testo, ma lo step 5 può creare un file in `docs/plans/` — azione reversibile ma concreta. Il rischio sale rispetto a una skill puramente analitica.
 
-**Come si attiva:** il frontmatter `description` contiene i TRIGGER (`implementa`, `crea`, `scrivi`, `aggiungi`). Queste parole compaiono in quasi tutte le richieste di sviluppo non banali, quindi Claude invoca la skill automaticamente senza che l'utente debba farlo esplicitamente.
+**Come si attiva:** il frontmatter `description` contiene due TRIGGER: parole chiave (`implementa`, `crea`, `scrivi`, `aggiungi`) + soglia di complessità (più di 10 righe). Il doppio filtro evita l'attivazione su modifiche banali.
 
-**Cosa garantisce il completamento:** lo step 5 (ottieni conferma) è un gate esplicito — Claude non può uscire dalla skill senza una conferma ricevuta dall'utente.
+**Cosa garantisce il completamento:** lo step 5 forza una decisione esplicita sulla complessità — se alta, Claude deve scrivere un piano in `docs/plans/` prima di procedere al codice.
 
 ---
 
