@@ -3,7 +3,9 @@
     "allow": [
       "Bash(npm install *)",
       "Bash(curl -s -o /dev/null -w \"%{http_code}\" \"http://localhost:5173/@fs/D:/SIAE/siae_archimede_2026/node_modules/@itsiae/siae-design-system/dist/siae-design-system.css\")",
-      "Bash(curl -s -o /dev/null -w \"main.ts: %{http_code}\\\\n\" \"http://localhost:5173/src/main.ts\")"
+      "Bash(curl -s -o /dev/null -w \"main.ts: %{http_code}\\\\n\" \"http://localhost:5173/src/main.ts\")",
+      "Bash(npx vitest *)",
+      "Bash(npm run *)"
     ]
   },
   "enabledPlugins": {}
