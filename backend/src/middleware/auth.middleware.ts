@@ -16,6 +16,11 @@ export function authMiddleware(req: Request, res: Response, next: NextFunction):
     res.status(401).json({ error: 'Token mancante' })
     return
   }
+  const token = authHeader.slice(7)
+  try {
+    req.user = verifyToken(token)
+    next()
+  } catch {
 
   const token = authHeader.slice(7)
 

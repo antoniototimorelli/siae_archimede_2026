@@ -1,3 +1,10 @@
+import bcrypt from 'bcrypt'
+import jwt from 'jsonwebtoken'
+import { findByEmail } from './user.service'
+import type { User } from '../types/user'
+
+export async function verifyCredentials(email: string, password: string): Promise<User | null> {
+  const user = findByEmail(email)
 import fs from 'fs'
 import path from 'path'
 import bcrypt from 'bcrypt'
@@ -28,12 +35,15 @@ export async function verifyCredentials(email: string, password: string): Promis
 
 export function generateToken(userId: string, email: string): string {
   const secret = process.env.JWT_SECRET
+  if (!secret) throw new Error('JWT_SECRET is not defined')
   if (!secret) throw new Error('JWT_SECRET non definito')
   return jwt.sign({ userId, email }, secret, { expiresIn: '1h' })
 }
 
 export function verifyToken(token: string): { userId: string; email: string } {
   const secret = process.env.JWT_SECRET
+  if (!secret) throw new Error('JWT_SECRET is not defined')
+  return jwt.verify(token, secret) as { userId: string; email: string }
   if (!secret) throw new Error('JWT_SECRET non definito')
   const payload = jwt.verify(token, secret)
   if (typeof payload !== 'object' || payload === null || !('userId' in payload) || !('email' in payload)) {

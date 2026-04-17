@@ -4,7 +4,6 @@ export interface User {
   lastName: string
   fiscalCode: string
   email: string
-  passwordHash: string
   phone: string
   address: string
   repertoires: string[]
@@ -13,9 +12,12 @@ export interface User {
   createdAt: string
 }
 
-export interface UserCredentials {
-  email: string
-  password: string
+export interface LoginResponse {
+  token: string
+}
+
+export interface ApiError {
+  error: string
 }
 
 export interface RegisterPayload {
