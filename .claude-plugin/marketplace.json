@@ -1,0 +1,13 @@
+{
+  "name": "siae-archimede-marketplace",
+  "owner": {
+    "name": "SIAE Archimede 2026"
+  },
+  "plugins": [
+    {
+      "name": "siae-archimede-plugin",
+      "source": "./siae-plugin",
+      "description": "Plugin per disciplinare il ciclo di sviluppo Claude Code: TDD, Conventional Commits, review automatica"
+    }
+  ]
+}
