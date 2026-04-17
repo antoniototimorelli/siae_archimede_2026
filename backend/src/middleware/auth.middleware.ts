@@ -22,7 +22,12 @@ export function authMiddleware(req: Request, res: Response, next: NextFunction):
   try {
     req.user = verifyToken(token)
     next()
-  } catch {
+  } catch (err) {
+    const message = (err as Error).message
+    if (message === 'JWT_SECRET non definito') {
+      res.status(500).json({ error: 'Errore di configurazione del server' })
+      return
+    }
     res.status(401).json({ error: 'Token non valido' })
   }
 }

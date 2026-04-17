@@ -10,12 +10,15 @@ export async function login(req: Request, res: Response): Promise<void> {
     return
   }
 
-  const user = await verifyCredentials(email, password)
-  if (!user) {
-    res.status(401).json({ error: 'Credenziali non valide' })
-    return
+  try {
+    const user = await verifyCredentials(email, password)
+    if (!user) {
+      res.status(401).json({ error: 'Credenziali non valide' })
+      return
+    }
+    const token = generateToken(user.id, user.email)
+    res.status(200).json({ token })
+  } catch {
+    res.status(500).json({ error: 'Errore interno del server' })
   }
-
-  const token = generateToken(user.id, user.email)
-  res.status(200).json({ token })
 }
