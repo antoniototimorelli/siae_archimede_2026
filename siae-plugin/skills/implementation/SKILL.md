@@ -13,10 +13,7 @@ Codice prodotto modifica file sorgente; un errore di tipo o di logica può rompe
 
 ## Checklist pre-scrittura
 
-Prima di aprire qualsiasi file di produzione, verificare:
-
-1. **Esiste un test RED** — la skill TDD deve aver prodotto almeno un test fallente. Se non esiste, fermarsi e invocare la skill TDD.
-2. **Il file è al posto giusto** — rispettare la struttura:
+Prima di aprire qualsiasi file di produzione, verificare che **il file sia al posto giusto** — rispettare la struttura:
    - `src/components/` → componenti Vue riutilizzabili (`PascalCase.vue`)
    - `src/views/` → pagine legate a una route (`PascalCase` + suffisso `View`)
    - `src/stores/` → store Pinia (`camelCase` + suffisso `Store`, `.ts`)
@@ -48,9 +45,7 @@ Prima di aprire qualsiasi file di produzione, verificare:
 
 ## Flusso obbligatorio
 
-1. Test RED presente → procedi a scrivere il minimo codice per farlo passare (GREEN).
-2. Refactor: elimina duplicazioni, correggi naming, verifica che i tipi siano esatti.
-3. Invoca `agents/reviewer.md` sull'output prodotto.
-4. Invoca la skill `verification` — non dichiarare il task completato prima di questo gate.
+1. Invoca `agents/reviewer.md` sull'output prodotto.
+2. Invoca la skill `verification` — non dichiarare il task completato prima di questo gate.
 
-> Claude non dichiara un'implementazione completa finché lo step 4 non restituisce esito positivo.
+> Claude non dichiara un'implementazione completa finché lo step 2 non restituisce esito positivo.
