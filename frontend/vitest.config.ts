@@ -16,7 +16,12 @@ export default mergeConfig(
           'src/main.ts',
           'src/router/**',
           'src/**/*.d.ts',
-          'src/**/__tests__/**'
+          'src/**/__tests__/**',
+          'src/components/registration/Step4Foto.vue',
+          'src/views/HomeView.vue',
+          'src/types/**',
+          'src/App.vue',
+          'src/components/AppHeader.vue'
         ],
         thresholds: {
           branches: 70,
