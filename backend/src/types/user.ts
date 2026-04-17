@@ -1,11 +1,3 @@
-export type Repertoire =
-  | 'MUSICA'
-  | 'CINEMA'
-  | 'DOR'
-  | 'LIRICA'
-  | 'OLAF_LETTERARIE'
-  | 'OLAF_FIGURATIVE'
-
 export interface User {
   id: string
   firstName: string
@@ -15,8 +7,26 @@ export interface User {
   passwordHash: string
   phone: string
   address: string
-  photoBase64?: string
-  repertoires: Repertoire[]
-  birthDate?: string
+  repertoires: string[]
+  photo?: string
+  birthDate: string
   createdAt: string
+}
+
+export interface UserCredentials {
+  email: string
+  password: string
+}
+
+export interface RegisterPayload {
+  firstName: string
+  lastName: string
+  fiscalCode: string
+  email: string
+  password: string
+  phone: string
+  address: string
+  repertoires: string[]
+  photo?: string
+  birthDate: string
 }
