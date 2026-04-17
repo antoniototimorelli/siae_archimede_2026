@@ -1,0 +1,7 @@
+{
+  "name": "siae-archimede-plugin",
+  "version": "0.1.0",
+  "description": "Plugin per disciplinare il ciclo di sviluppo Claude Code: TDD, Conventional Commits, review automatica",
+  "author": "Diana Husanu",
+  "homepage": "https://github.com/diana-husanu/siae-archimede-2026"
+}
